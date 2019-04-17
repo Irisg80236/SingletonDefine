@@ -30,7 +30,16 @@ static dispatch_once_t once; \
 static __class * __singleton__; \
 dispatch_once( &once, ^{ __singleton__ = [[[self class] alloc] init]; } ); \
 return __singleton__; \
+}\
++ (instancetype)allocWithZone:(struct _NSZone *)zone\
+{ \
+static dispatch_once_t once; \
+static __class * __singleton__; \
+dispatch_once( &once, ^{ __singleton__ = [[[self class] alloc] init]; } ); \
+return __singleton__; \
+}\
+- (id)copyWithZone:(NSZone *)zone{ \
+return self; \
 }
-
 
 #endif /* SingletonDefine_h */
